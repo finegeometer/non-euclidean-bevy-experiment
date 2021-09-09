@@ -1,0 +1,24 @@
+[package]
+name = "bevy_euclidean_example"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy_dylib = "0.5.0"
+
+bevy_app = "0.5.0"
+bevy_asset = "0.5.0"
+bevy_core = "0.5.0"
+bevy_ecs = "0.5.0"
+bevy_gilrs = "0.5.0"
+bevy_input = "0.5.0"
+bevy_log = "0.5.0"
+bevy_math = "0.5.0"
+bevy_pbr = "0.5.0"
+bevy_render = "0.5.0"
+bevy_transform = "0.5.0"
+bevy_window = "0.5.0"
+bevy_winit = { version = "0.5.0", features = ["x11"] }
+bevy_wgpu = "0.5.0"
