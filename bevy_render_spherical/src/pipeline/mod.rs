@@ -1,17 +1,24 @@
-// mod bind_group {
-//     pub use bevy_render::pipeline::{BindGroupDescriptor, BindGroupDescriptorId};
-// }
-// mod binding {
-//     pub use bevy_render::pipeline::{BindType, BindingDescriptor, BindingShaderStage};
-// }
-mod bind_group;
-mod binding;
+mod bind_group {
+    pub use bevy_render::pipeline::{BindGroupDescriptor, BindGroupDescriptorId};
+}
+mod binding {
+    pub use bevy_render::pipeline::{BindType, BindingDescriptor, BindingShaderStage};
+}
 #[allow(clippy::module_inception)]
 mod pipeline;
 mod pipeline_compiler;
-mod pipeline_layout;
+mod pipeline_layout {
+    pub use bevy_render::pipeline::{PipelineLayout, UniformProperty};
+}
 mod render_pipelines;
-mod state_descriptors;
+mod state_descriptors {
+    pub use bevy_render::pipeline::{
+        BlendFactor, BlendOperation, BlendState, ColorTargetState, ColorWrite, CompareFunction,
+        CullMode, DepthBiasState, DepthStencilState, FrontFace, IndexFormat, MultisampleState,
+        PolygonMode, PrimitiveState, PrimitiveTopology, StencilFaceState, StencilOperation,
+        StencilState,
+    };
+}
 mod vertex_buffer_descriptor {
     pub use bevy_render::pipeline::{
         get_vertex_attribute_name_id, InputStepMode, VertexAttribute, VertexBufferLayout,
