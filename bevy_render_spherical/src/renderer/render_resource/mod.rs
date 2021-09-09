@@ -1,4 +1,8 @@
-mod bind_group;
+mod bind_group {
+    pub use bevy_render::renderer::{
+        BindGroup, BindGroupBuilder, BindGroupId, IndexedBindGroupEntry,
+    };
+}
 mod buffer {
     pub use bevy_render::renderer::{BufferId, BufferInfo, BufferMapMode, BufferUsage};
 }

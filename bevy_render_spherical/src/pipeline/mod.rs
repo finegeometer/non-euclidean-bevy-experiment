@@ -5,7 +5,9 @@ mod binding {
     pub use bevy_render::pipeline::{BindType, BindingDescriptor, BindingShaderStage};
 }
 #[allow(clippy::module_inception)]
-mod pipeline;
+mod pipeline {
+    pub use bevy_render::pipeline::PipelineDescriptor;
+}
 mod pipeline_compiler;
 mod pipeline_layout {
     pub use bevy_render::pipeline::{PipelineLayout, UniformProperty};

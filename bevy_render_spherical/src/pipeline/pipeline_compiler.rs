@@ -1,51 +1,13 @@
-use super::{state_descriptors::PrimitiveTopology, IndexFormat, PipelineDescriptor};
+use super::PipelineDescriptor;
 use crate::{
     pipeline::{BindType, InputStepMode, VertexBufferLayout},
     renderer::RenderResourceContext,
     shader::{Shader, ShaderError},
 };
 use bevy_asset::{Assets, Handle};
-use bevy_reflect::{Reflect, ReflectDeserialize};
-use bevy_utils::{HashMap, HashSet};
-use once_cell::sync::Lazy;
-use serde::{Deserialize, Serialize};
+use bevy_utils::HashMap;
 
-#[derive(Clone, Eq, PartialEq, Debug, Reflect)]
-#[reflect(PartialEq)]
-pub struct PipelineSpecialization {
-    pub shader_specialization: ShaderSpecialization,
-    pub primitive_topology: PrimitiveTopology,
-    pub dynamic_bindings: HashSet<String>,
-    pub strip_index_format: Option<IndexFormat>,
-    pub vertex_buffer_layout: VertexBufferLayout,
-    pub sample_count: u32,
-}
-
-impl Default for PipelineSpecialization {
-    fn default() -> Self {
-        Self {
-            sample_count: 1,
-            strip_index_format: None,
-            shader_specialization: Default::default(),
-            primitive_topology: Default::default(),
-            dynamic_bindings: Default::default(),
-            vertex_buffer_layout: Default::default(),
-        }
-    }
-}
-
-impl PipelineSpecialization {
-    pub fn empty() -> &'static PipelineSpecialization {
-        pub static EMPTY: Lazy<PipelineSpecialization> = Lazy::new(PipelineSpecialization::default);
-        &EMPTY
-    }
-}
-
-#[derive(Clone, Eq, PartialEq, Debug, Default, Reflect, Serialize, Deserialize)]
-#[reflect(PartialEq, Serialize, Deserialize)]
-pub struct ShaderSpecialization {
-    pub shader_defs: HashSet<String>,
-}
+pub use bevy_render::pipeline::{PipelineSpecialization, ShaderSpecialization};
 
 #[derive(Debug)]
 struct SpecializedShader {

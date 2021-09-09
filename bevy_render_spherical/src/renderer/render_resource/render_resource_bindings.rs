@@ -1,65 +1,13 @@
-use super::{BindGroup, BindGroupId, BufferId, SamplerId, TextureId};
+use super::{BindGroup, BindGroupId, BufferId};
 use crate::{
     pipeline::{BindGroupDescriptor, BindGroupDescriptorId, IndexFormat, PipelineDescriptor},
     renderer::RenderResourceContext,
 };
 use bevy_asset::{Asset, Handle, HandleUntyped};
 use bevy_utils::{HashMap, HashSet};
-use std::{any::TypeId, ops::Range};
+use std::any::TypeId;
 
-#[derive(Clone, PartialEq, Eq, Debug)]
-pub enum RenderResourceBinding {
-    Buffer {
-        buffer: BufferId,
-        range: Range<u64>,
-        dynamic_index: Option<u32>,
-    },
-    Texture(TextureId),
-    Sampler(SamplerId),
-}
-
-impl RenderResourceBinding {
-    pub fn get_texture(&self) -> Option<TextureId> {
-        if let RenderResourceBinding::Texture(texture) = self {
-            Some(*texture)
-        } else {
-            None
-        }
-    }
-
-    pub fn get_buffer(&self) -> Option<BufferId> {
-        if let RenderResourceBinding::Buffer { buffer, .. } = self {
-            Some(*buffer)
-        } else {
-            None
-        }
-    }
-
-    pub fn is_dynamic_buffer(&self) -> bool {
-        matches!(
-            self,
-            RenderResourceBinding::Buffer {
-                dynamic_index: Some(_),
-                ..
-            }
-        )
-    }
-
-    pub fn get_sampler(&self) -> Option<SamplerId> {
-        if let RenderResourceBinding::Sampler(sampler) = self {
-            Some(*sampler)
-        } else {
-            None
-        }
-    }
-}
-
-#[derive(Eq, PartialEq, Debug)]
-pub enum BindGroupStatus {
-    Changed(BindGroupId),
-    Unchanged(BindGroupId),
-    NoMatch,
-}
+pub use bevy_render::renderer::{BindGroupStatus, RenderResourceBinding};
 
 // PERF: if the bindings are scoped to a specific pipeline layout, then names could be replaced with
 // indices here for a perf boost
