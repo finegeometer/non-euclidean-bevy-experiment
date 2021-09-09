@@ -23,7 +23,7 @@ pub mod pass;
 pub mod pipeline;
 pub mod render_graph;
 pub mod renderer;
-pub mod shader;
+pub use bevy_render::shader;
 pub mod texture;
 pub mod wireframe;
 
