@@ -8,7 +8,11 @@ mod binding {
 mod pipeline {
     pub use bevy_render::pipeline::PipelineDescriptor;
 }
-mod pipeline_compiler;
+mod pipeline_compiler {
+    pub use bevy_render::pipeline::{
+        PipelineCompiler, PipelineSpecialization, ShaderSpecialization,
+    };
+}
 mod pipeline_layout {
     pub use bevy_render::pipeline::{PipelineLayout, UniformProperty};
 }

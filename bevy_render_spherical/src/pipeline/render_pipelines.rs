@@ -1,4 +1,3 @@
-use super::{PipelineDescriptor, PipelineSpecialization};
 use crate::{
     draw::{Draw, DrawContext, OutsideFrustum},
     mesh::{Indices, Mesh},
@@ -8,79 +7,11 @@ use crate::{
 use bevy_asset::{Assets, Handle};
 use bevy_ecs::{
     query::Without,
-    reflect::ReflectComponent,
     system::{Query, Res, ResMut},
 };
-use bevy_reflect::Reflect;
 use bevy_utils::HashSet;
 
-#[derive(Debug, Default, Clone, Reflect)]
-pub struct RenderPipeline {
-    pub pipeline: Handle<PipelineDescriptor>,
-    pub specialization: PipelineSpecialization,
-    /// used to track if PipelineSpecialization::dynamic_bindings is in sync with
-    /// RenderResourceBindings
-    pub dynamic_bindings_generation: usize,
-}
-
-impl RenderPipeline {
-    pub fn new(pipeline: Handle<PipelineDescriptor>) -> Self {
-        RenderPipeline {
-            specialization: Default::default(),
-            pipeline,
-            dynamic_bindings_generation: std::usize::MAX,
-        }
-    }
-
-    pub fn specialized(
-        pipeline: Handle<PipelineDescriptor>,
-        specialization: PipelineSpecialization,
-    ) -> Self {
-        RenderPipeline {
-            pipeline,
-            specialization,
-            dynamic_bindings_generation: std::usize::MAX,
-        }
-    }
-}
-
-#[derive(Debug, Clone, Reflect)]
-#[reflect(Component)]
-pub struct RenderPipelines {
-    pub pipelines: Vec<RenderPipeline>,
-    #[reflect(ignore)]
-    pub bindings: RenderResourceBindings,
-}
-
-impl RenderPipelines {
-    pub fn from_pipelines(pipelines: Vec<RenderPipeline>) -> Self {
-        Self {
-            pipelines,
-            ..Default::default()
-        }
-    }
-
-    pub fn from_handles<'a, T: IntoIterator<Item = &'a Handle<PipelineDescriptor>>>(
-        handles: T,
-    ) -> Self {
-        RenderPipelines {
-            pipelines: handles
-                .into_iter()
-                .map(|pipeline| RenderPipeline::new(pipeline.clone_weak()))
-                .collect::<Vec<RenderPipeline>>(),
-            ..Default::default()
-        }
-    }
-}
-
-impl Default for RenderPipelines {
-    fn default() -> Self {
-        Self {
-            bindings: Default::default(),
-            pipelines: vec![RenderPipeline::default()],
-        }
-    }
-}
+pub use bevy_render::pipeline::{RenderPipeline, RenderPipelines};
 
 pub fn draw_render_pipelines_system(
     mut draw_context: DrawContext,

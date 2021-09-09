@@ -8,7 +8,11 @@ mod buffer {
 }
 #[allow(clippy::module_inception)]
 mod render_resource;
-mod render_resource_bindings;
+mod render_resource_bindings {
+    pub use bevy_render::renderer::{
+        AssetRenderResourceBindings, BindGroupStatus, RenderResourceBinding, RenderResourceBindings,
+    };
+}
 mod shared_buffers;
 mod texture {
     pub use bevy_render::renderer::{SamplerId, TextureId};
