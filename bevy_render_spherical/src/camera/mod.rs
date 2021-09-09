@@ -1,6 +1,8 @@
 mod active_cameras;
 #[allow(clippy::module_inception)]
-mod camera;
+mod camera {
+    pub use bevy_render::camera::{camera_system, Camera, DepthCalculation};
+}
 mod projection;
 mod visible_entities;
 

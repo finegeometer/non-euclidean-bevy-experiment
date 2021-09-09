@@ -4,6 +4,7 @@ use bevy_core::FloatOrd;
 use bevy_ecs::{entity::Entity, query::Without, reflect::ReflectComponent, system::Query};
 use bevy_reflect::Reflect;
 use bevy_transform_spherical::prelude::GlobalTransform;
+use bevy_utils::tracing::warn;
 
 #[derive(Debug)]
 pub struct VisibleEntity {
@@ -232,6 +233,10 @@ pub fn visible_entities_system(
                 // camera
                 FloatOrd(match camera.depth_calculation {
                     DepthCalculation::Distance => (camera_position - position).length_squared(),
+                    DepthCalculation::ZDifference => {
+                        warn!("The ZDifference depth calculation does not make sense in spherical space!");
+                        (camera_position - position).length_squared()
+                    }
                 })
             } else {
                 let order = FloatOrd(no_transform_order);

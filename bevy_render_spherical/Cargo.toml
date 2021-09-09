@@ -13,6 +13,9 @@ license = "MIT"
 keywords = ["bevy"]
 
 [dependencies]
+# Reuse what I can.
+bevy_render = { version = "0.5.0" }
+
 # bevy
 bevy_app = { version = "0.5.0" }
 bevy_asset = { version = "0.5.0" }
@@ -51,9 +54,9 @@ bevy-glsl-to-spirv = "0.2.0"
 shaderc = "0.7.0"
 
 [features]
-png = ["image/png"]
-hdr = ["image/hdr"]
-dds = ["image/dds"]
-tga = ["image/tga"]
-jpeg = ["image/jpeg"]
-bmp = ["image/bmp"]
+png = ["image/png", "bevy_render/png"]
+hdr = ["image/hdr", "bevy_render/hdr"]
+dds = ["image/dds", "bevy_render/dds"]
+tga = ["image/tga", "bevy_render/tga"]
+jpeg = ["image/jpeg", "bevy_render/jpeg"]
+bmp = ["image/bmp", "bevy_render/bmp"]

@@ -1,4 +1,3 @@
-use super::{BufferId, SamplerId, TextureId};
 use crate::texture::Texture;
 use bevy_asset::Handle;
 
@@ -7,70 +6,7 @@ pub use bevy_derive::{RenderResource, RenderResources};
 use bevy_math::{Mat4, Vec2, Vec3, Vec4};
 use bevy_transform_spherical::components::GlobalTransform;
 
-#[derive(Debug, Clone, Eq, PartialEq)]
-pub enum RenderResourceType {
-    Buffer,
-    Texture,
-    Sampler,
-}
-
-#[derive(Debug, Clone, Hash, Eq, PartialEq)]
-pub enum RenderResourceId {
-    Buffer(BufferId),
-    Texture(TextureId),
-    Sampler(SamplerId),
-}
-
-impl From<BufferId> for RenderResourceId {
-    fn from(value: BufferId) -> Self {
-        RenderResourceId::Buffer(value)
-    }
-}
-
-impl From<TextureId> for RenderResourceId {
-    fn from(value: TextureId) -> Self {
-        RenderResourceId::Texture(value)
-    }
-}
-
-impl From<SamplerId> for RenderResourceId {
-    fn from(value: SamplerId) -> Self {
-        RenderResourceId::Sampler(value)
-    }
-}
-
-impl RenderResourceId {
-    pub fn get_texture(&self) -> Option<TextureId> {
-        if let RenderResourceId::Texture(id) = self {
-            Some(*id)
-        } else {
-            None
-        }
-    }
-
-    pub fn get_buffer(&self) -> Option<BufferId> {
-        if let RenderResourceId::Buffer(id) = self {
-            Some(*id)
-        } else {
-            None
-        }
-    }
-
-    pub fn get_sampler(&self) -> Option<SamplerId> {
-        if let RenderResourceId::Sampler(id) = self {
-            Some(*id)
-        } else {
-            None
-        }
-    }
-}
-
-bitflags::bitflags! {
-    #[repr(transparent)]
-    pub struct RenderResourceHints: u32 {
-        const BUFFER = 1;
-    }
-}
+pub use bevy_render::renderer::{RenderResourceHints, RenderResourceId, RenderResourceType};
 
 pub trait RenderResource {
     fn resource_type(&self) -> Option<RenderResourceType>;

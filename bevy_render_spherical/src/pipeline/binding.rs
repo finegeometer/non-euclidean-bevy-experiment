@@ -3,13 +3,7 @@ use crate::texture::{
     StorageTextureAccess, TextureFormat, TextureSampleType, TextureViewDimension,
 };
 
-bitflags::bitflags! {
-    pub struct BindingShaderStage: u32 {
-        const VERTEX = 1;
-        const FRAGMENT = 2;
-        const COMPUTE = 4;
-    }
-}
+pub use bevy_render::pipeline::BindingShaderStage;
 
 #[derive(Hash, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 pub struct BindingDescriptor {

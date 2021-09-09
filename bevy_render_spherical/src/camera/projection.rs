@@ -1,14 +1,9 @@
+pub use bevy_render::camera::{CameraProjection, ScalingMode, WindowOrigin};
+
 use super::DepthCalculation;
 use bevy_ecs::reflect::ReflectComponent;
 use bevy_math::{Mat4, Vec4};
-use bevy_reflect::{Reflect, ReflectDeserialize};
-use serde::{Deserialize, Serialize};
-
-pub trait CameraProjection {
-    fn get_projection_matrix(&self) -> Mat4;
-    fn update(&mut self, width: f32, height: f32);
-    fn depth_calculation(&self) -> DepthCalculation;
-}
+use bevy_reflect::Reflect;
 
 #[derive(Debug, Clone, Reflect)]
 #[reflect(Component)]
@@ -58,26 +53,4 @@ impl Default for PerspectiveProjection {
             aspect_ratio: 1.0,
         }
     }
-}
-
-// TODO: make this a component instead of a property
-#[derive(Debug, Clone, Reflect, Serialize, Deserialize)]
-#[reflect_value(Serialize, Deserialize)]
-pub enum WindowOrigin {
-    Center,
-    BottomLeft,
-}
-
-#[derive(Debug, Clone, Reflect, Serialize, Deserialize)]
-#[reflect_value(Serialize, Deserialize)]
-pub enum ScalingMode {
-    /// Manually specify left/right/top/bottom values.
-    /// Ignore window resizing; the image will stretch.
-    None,
-    /// Match the window size. 1 world unit = 1 pixel.
-    WindowSize,
-    /// Keep vertical axis constant; resize horizontal with aspect ratio.
-    FixedVertical,
-    /// Keep horizontal axis constant; resize vertical with aspect ratio.
-    FixedHorizontal,
 }

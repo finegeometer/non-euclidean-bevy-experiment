@@ -1,6 +1,21 @@
 pub mod camera;
-pub mod color;
-pub mod colorspace;
+pub mod color {
+    use super::texture::Texture;
+
+    use crate::{
+        impl_render_resource_bytes,
+        renderer::{RenderResource, RenderResourceType},
+    };
+    use bevy_asset::Handle;
+    use bevy_core::Bytes;
+
+    pub use bevy_render::color::{Color, HexColorError};
+
+    impl_render_resource_bytes!(Color);
+}
+pub mod colorspace {
+    pub use bevy_render::colorspace::*;
+}
 pub mod draw;
 pub mod entity;
 pub mod mesh;

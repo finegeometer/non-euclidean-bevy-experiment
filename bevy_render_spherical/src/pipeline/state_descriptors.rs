@@ -75,17 +75,7 @@ impl StencilFaceState {
     };
 }
 
-#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
-pub enum CompareFunction {
-    Never = 0,
-    Less = 1,
-    Equal = 2,
-    LessEqual = 3,
-    Greater = 4,
-    NotEqual = 5,
-    GreaterEqual = 6,
-    Always = 7,
-}
+pub use bevy_render::pipeline::CompareFunction;
 
 /// Describes how the VertexAttributes should be interpreted while rendering
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize, Reflect)]

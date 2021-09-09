@@ -13,6 +13,8 @@ pub use shader_reflect::*;
 
 use crate::pipeline::{BindGroupDescriptor, VertexBufferLayout};
 
+// pub use bevy_render::shader::{ShaderLayout, GL_FRONT_FACING, GL_INSTANCE_INDEX, GL_VERTEX_INDEX};
+
 /// Defines the memory layout of a shader
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ShaderLayout {

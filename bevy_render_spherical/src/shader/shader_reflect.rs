@@ -303,11 +303,9 @@ mod tests {
     use super::*;
     use crate::shader::{Shader, ShaderStage};
 
-    impl VertexBufferLayout {
-        pub fn test_zero_stride(mut self) -> VertexBufferLayout {
-            self.stride = 0;
-            self
-        }
+    pub fn test_zero_stride(mut this: VertexBufferLayout) -> VertexBufferLayout {
+        this.stride = 0;
+        this
     }
     #[test]
     fn test_reflection() {
@@ -340,7 +338,7 @@ mod tests {
             ShaderLayout {
                 entry_point: "main".into(),
                 vertex_buffer_layout: vec![
-                    VertexBufferLayout::new_from_attribute(
+                    test_zero_stride(VertexBufferLayout::new_from_attribute(
                         VertexAttribute {
                             name: "Vertex_Position".into(),
                             format: VertexFormat::Float4,
@@ -348,9 +346,8 @@ mod tests {
                             shader_location: 0,
                         },
                         InputStepMode::Vertex
-                    )
-                    .test_zero_stride(),
-                    VertexBufferLayout::new_from_attribute(
+                    )),
+                    test_zero_stride(VertexBufferLayout::new_from_attribute(
                         VertexAttribute {
                             name: "Vertex_Normal".into(),
                             format: VertexFormat::Uint4,
@@ -358,9 +355,8 @@ mod tests {
                             shader_location: 1,
                         },
                         InputStepMode::Vertex
-                    )
-                    .test_zero_stride(),
-                    VertexBufferLayout::new_from_attribute(
+                    )),
+                    test_zero_stride(VertexBufferLayout::new_from_attribute(
                         VertexAttribute {
                             name: "I_TestInstancing_Property".into(),
                             format: VertexFormat::Uint4,
@@ -368,8 +364,7 @@ mod tests {
                             shader_location: 2,
                         },
                         InputStepMode::Instance
-                    )
-                    .test_zero_stride(),
+                    )),
                 ],
                 bind_groups: vec![
                     BindGroupDescriptor::new(
