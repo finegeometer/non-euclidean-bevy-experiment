@@ -387,7 +387,7 @@ dependencies = [
  "bevy_pbr_spherical",
  "bevy_render_spherical",
  "bevy_transform_spherical",
- "bevy_wgpu_spherical",
+ "bevy_wgpu",
  "bevy_window",
  "bevy_winit",
 ]
@@ -609,26 +609,6 @@ dependencies = [
  "bevy_diagnostic",
  "bevy_ecs",
  "bevy_render",
- "bevy_utils",
- "bevy_window",
- "bevy_winit",
- "crossbeam-channel",
- "crossbeam-utils",
- "futures-lite",
- "parking_lot",
- "wgpu",
-]
-
-[[package]]
-name = "bevy_wgpu_spherical"
-version = "0.5.0"
-dependencies = [
- "bevy_app",
- "bevy_asset",
- "bevy_core",
- "bevy_diagnostic",
- "bevy_ecs",
- "bevy_render_spherical",
  "bevy_utils",
  "bevy_window",
  "bevy_winit",
@@ -1863,7 +1843,6 @@ dependencies = [
  "log",
  "num-traits",
  "petgraph",
- "serde",
  "spirv_headers",
  "thiserror",
 ]
@@ -2836,7 +2815,6 @@ dependencies = [
  "naga",
  "parking_lot",
  "raw-window-handle",
- "serde",
  "smallvec",
  "syn",
  "tracing",
@@ -2870,8 +2848,6 @@ dependencies = [
  "naga",
  "parking_lot",
  "raw-window-handle",
- "ron",
- "serde",
  "smallvec",
  "thiserror",
  "tracing",
@@ -2885,7 +2861,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "72fa9ba80626278fd87351555c363378d08122d7601e58319be3d6fa85a87747"
 dependencies = [
  "bitflags",
- "serde",
 ]
 
 [[package]]

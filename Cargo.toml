@@ -4,7 +4,6 @@ members = [
     "bevy_transform_spherical",
     "bevy_render_spherical",
     "bevy_pbr_spherical",
-    "bevy_wgpu_spherical",
 
     "bevy_euclidean_example",
     "bevy_non_euclidean_example",

@@ -21,4 +21,4 @@ bevy_render_spherical = {path = "../bevy_render_spherical", version = "0.5.0"}
 bevy_transform_spherical = {path = "../bevy_transform_spherical", version = "0.5.0"}
 bevy_window = "0.5.0"
 bevy_winit = { version = "0.5.0", features = ["x11"] }
-bevy_wgpu_spherical = {path = "../bevy_wgpu_spherical", version = "0.5.0"}
+bevy_wgpu = { version = "0.5.0" }

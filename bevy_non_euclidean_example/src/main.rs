@@ -24,7 +24,7 @@ fn main() {
         .add_plugin(bevy_pbr_spherical::PbrPlugin::default())
         .add_plugin(bevy_gilrs::GilrsPlugin::default())
         .add_plugin(bevy_winit::WinitPlugin::default())
-        .add_plugin(bevy_wgpu_spherical::WgpuPlugin::default())
+        .add_plugin(bevy_wgpu::WgpuPlugin::default())
         .add_startup_system(setup.system())
         .add_system(motion.system())
         .run();

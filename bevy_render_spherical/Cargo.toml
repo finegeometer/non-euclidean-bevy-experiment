@@ -7,7 +7,7 @@ authors = [
     "Bevy Contributors <bevyengine@gmail.com>",
     "Carter Anderson <mcanders1@gmail.com>",
 ]
-description = """A port of [`bevy_render`](https://docs.rs/bevy_render/0.5.0/bevy_render/), \
+description = """A partial port of [`bevy_render`](https://docs.rs/bevy_render/0.5.0/bevy_render/), \
 to work with spherical space instead of Euclidean space."""
 license = "MIT"
 keywords = ["bevy"]
