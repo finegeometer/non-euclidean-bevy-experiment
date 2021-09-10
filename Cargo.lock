@@ -573,9 +573,12 @@ name = "bevy_transform_spherical"
 version = "0.5.0"
 dependencies = [
  "bevy_app",
+ "bevy_asset",
+ "bevy_core",
  "bevy_ecs",
  "bevy_math",
  "bevy_reflect",
+ "bevy_render",
  "bevy_transform",
  "bevy_utils",
  "smallvec",

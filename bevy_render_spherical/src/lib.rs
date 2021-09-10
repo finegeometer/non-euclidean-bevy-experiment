@@ -1,23 +1,12 @@
-pub use bevy_render::{colorspace, mesh, pass, shader, RenderStage, RenderSystem};
+pub use bevy_render::{color, colorspace, mesh, pass, shader, texture, RenderStage, RenderSystem};
 pub use once_cell;
 
 pub mod camera;
-pub mod color {
-    pub use bevy_render::color::{Color, HexColorError};
-
-    use super::texture::Texture;
-    use crate::renderer::{RenderResource, RenderResourceType};
-    use bevy_asset::Handle;
-    use bevy_core::Bytes;
-
-    crate::impl_render_resource_bytes!(Color);
-}
 pub mod draw;
 pub mod entity;
 pub mod pipeline;
 pub mod render_graph;
 pub mod renderer;
-pub mod texture;
 pub mod wireframe;
 
 pub mod prelude {

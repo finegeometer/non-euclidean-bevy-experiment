@@ -174,3 +174,59 @@ impl Mul<Vec4> for GlobalTransform {
 
 // TODO: I don't understand the multiplication order for GlobalTransform.
 // When implementing the system, figure this out!
+
+#[cfg(feature = "render")]
+mod render {
+    use super::GlobalTransform;
+    use bevy_asset::Handle;
+    use bevy_core::Bytes;
+    use bevy_render::{
+        prelude::Texture,
+        renderer::{RenderResource, RenderResourceIterator, RenderResourceType, RenderResources},
+    };
+
+    impl RenderResource for GlobalTransform {
+        fn resource_type(&self) -> Option<RenderResourceType> {
+            Some(RenderResourceType::Buffer)
+        }
+
+        fn write_buffer_bytes(&self, buffer: &mut [u8]) {
+            let mat4 = self.compute_matrix();
+            mat4.write_bytes(buffer);
+        }
+
+        fn buffer_byte_len(&self) -> Option<usize> {
+            Some(std::mem::size_of::<[f32; 16]>())
+        }
+
+        fn texture(&self) -> Option<&Handle<Texture>> {
+            None
+        }
+    }
+
+    impl RenderResources for GlobalTransform {
+        fn render_resources_len(&self) -> usize {
+            1
+        }
+
+        fn get_render_resource(&self, index: usize) -> Option<&dyn RenderResource> {
+            if index == 0 {
+                Some(self)
+            } else {
+                None
+            }
+        }
+
+        fn get_render_resource_name(&self, index: usize) -> Option<&str> {
+            if index == 0 {
+                Some("Transform")
+            } else {
+                None
+            }
+        }
+
+        fn iter(&self) -> RenderResourceIterator {
+            RenderResourceIterator::new(self)
+        }
+    }
+}
