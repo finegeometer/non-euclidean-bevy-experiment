@@ -1,14 +1,13 @@
-use crate::{light::Light, material::StandardMaterial, render_graph::PBR_PIPELINE_HANDLE};
+use crate::{light::Light, render_graph::PBR_PIPELINE_HANDLE, StandardMaterial};
 use bevy_asset::Handle;
 use bevy_ecs::bundle::Bundle;
-use bevy_render::{
-    draw::Draw,
+use bevy_render_spherical::{
+    draw::{Draw, Visible},
     mesh::Mesh,
     pipeline::{RenderPipeline, RenderPipelines},
-    prelude::Visible,
     render_graph::base::MainPass,
 };
-use bevy_transform::prelude::{GlobalTransform, Transform};
+use bevy_transform_spherical::prelude::{GlobalTransform, Transform};
 
 /// A component bundle for "pbr mesh" entities
 #[derive(Bundle)]

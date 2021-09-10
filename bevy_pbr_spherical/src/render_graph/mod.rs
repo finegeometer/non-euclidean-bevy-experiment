@@ -1,3 +1,5 @@
+pub use bevy_pbr::render_graph::{node, uniform};
+
 mod lights_node;
 mod pbr_pipeline;
 
@@ -5,26 +7,14 @@ use bevy_ecs::world::World;
 pub use lights_node::*;
 pub use pbr_pipeline::*;
 
-/// the names of pbr graph nodes
-pub mod node {
-    pub const TRANSFORM: &str = "transform";
-    pub const STANDARD_MATERIAL: &str = "standard_material";
-    pub const LIGHTS: &str = "lights";
-}
-
-/// the names of pbr uniforms
-pub mod uniform {
-    pub const LIGHTS: &str = "Lights";
-}
-
 use crate::prelude::StandardMaterial;
 use bevy_asset::Assets;
-use bevy_render::{
+use bevy_render_spherical::{
     pipeline::PipelineDescriptor,
     render_graph::{base, AssetRenderResourcesNode, RenderGraph, RenderResourcesNode},
     shader::Shader,
 };
-use bevy_transform::prelude::GlobalTransform;
+use bevy_transform_spherical::prelude::GlobalTransform;
 
 pub(crate) fn add_pbr_graph(world: &mut World) {
     {

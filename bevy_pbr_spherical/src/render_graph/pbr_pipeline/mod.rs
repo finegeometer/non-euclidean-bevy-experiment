@@ -1,6 +1,5 @@
-use bevy_asset::{Assets, HandleUntyped};
-use bevy_reflect::TypeUuid;
-use bevy_render::{
+use bevy_asset::Assets;
+use bevy_render_spherical::{
     pipeline::{
         BlendFactor, BlendOperation, BlendState, ColorTargetState, ColorWrite, CompareFunction,
         DepthBiasState, DepthStencilState, PipelineDescriptor, StencilFaceState, StencilState,
@@ -9,8 +8,7 @@ use bevy_render::{
     texture::TextureFormat,
 };
 
-pub const PBR_PIPELINE_HANDLE: HandleUntyped =
-    HandleUntyped::weak_from_u64(PipelineDescriptor::TYPE_UUID, 13148362314012771389);
+pub use bevy_pbr::render_graph::PBR_PIPELINE_HANDLE;
 
 pub(crate) fn build_pbr_pipeline(shaders: &mut Assets<Shader>) -> PipelineDescriptor {
     PipelineDescriptor {

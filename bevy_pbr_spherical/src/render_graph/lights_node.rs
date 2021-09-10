@@ -7,14 +7,14 @@ use bevy_ecs::{
     system::{BoxedSystem, IntoSystem, Local, Query, Res, ResMut},
     world::World,
 };
-use bevy_render::{
+use bevy_render_spherical::{
     render_graph::{CommandQueue, Node, ResourceSlots, SystemNode},
     renderer::{
         BufferId, BufferInfo, BufferMapMode, BufferUsage, RenderContext, RenderResourceBinding,
         RenderResourceBindings, RenderResourceContext,
     },
 };
-use bevy_transform::prelude::*;
+use bevy_transform_spherical::prelude::*;
 
 /// A Render Graph [Node] that write light data from the ECS to GPU buffers
 #[derive(Debug, Default)]
