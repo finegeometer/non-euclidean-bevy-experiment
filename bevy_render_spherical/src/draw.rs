@@ -7,9 +7,11 @@ use crate::{
     shader::Shader,
 };
 use bevy_asset::{Asset, Assets, Handle};
-use bevy_ecs::system::{Query, Res, ResMut, SystemParam};
+use bevy_ecs::system::{Res, ResMut, SystemParam};
 
-pub use bevy_render::draw::{Draw, DrawError, OutsideFrustum, RenderCommand, Visible};
+pub use bevy_render::draw::{
+    clear_draw_system, Draw, DrawError, OutsideFrustum, RenderCommand, Visible,
+};
 
 #[derive(SystemParam)]
 pub struct DrawContext<'a> {
@@ -208,10 +210,4 @@ impl<'a> DrawContext<'a> {
 
 pub trait Drawable {
     fn draw(&mut self, draw: &mut Draw, context: &mut DrawContext) -> Result<(), DrawError>;
-}
-
-pub fn clear_draw_system(mut query: Query<&mut Draw>) {
-    for mut draw in query.iter_mut() {
-        draw.clear_render_commands();
-    }
 }

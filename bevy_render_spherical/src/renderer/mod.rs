@@ -1,13 +1,6 @@
-mod headless_render_resource_context;
-mod render_context {
-    pub use bevy_render::renderer::RenderContext;
-}
 mod render_resource;
-mod render_resource_context {
-    pub use bevy_render::renderer::RenderResourceContext;
-}
 
-pub use headless_render_resource_context::*;
-pub use render_context::*;
+pub use bevy_render::renderer::{
+    HeadlessRenderResourceContext, RenderContext, RenderResourceContext,
+};
 pub use render_resource::*;
-pub use render_resource_context::*;

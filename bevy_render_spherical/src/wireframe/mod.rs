@@ -6,20 +6,17 @@ use crate::{
     shader::Shader,
 };
 use bevy_app::prelude::*;
-use bevy_asset::{Assets, Handle, HandleUntyped};
+use bevy_asset::{Assets, Handle};
 use bevy_ecs::{
     query::With,
-    reflect::ReflectComponent,
     system::{IntoSystem, Query, QuerySet, Res},
     world::Mut,
 };
-use bevy_reflect::{Reflect, TypeUuid};
 use bevy_utils::HashSet;
 
 mod pipeline;
 
-pub const WIREFRAME_PIPELINE_HANDLE: HandleUntyped =
-    HandleUntyped::weak_from_u64(PipelineDescriptor::TYPE_UUID, 0x137c75ab7e9ad7f5);
+pub use bevy_render::wireframe::{Wireframe, WireframeConfig, WIREFRAME_PIPELINE_HANDLE};
 
 #[derive(Debug, Default)]
 pub struct WireframePlugin;
@@ -37,21 +34,6 @@ impl Plugin for WireframePlugin {
             WIREFRAME_PIPELINE_HANDLE,
             pipeline::build_wireframe_pipeline(&mut shaders),
         );
-    }
-}
-
-#[derive(Debug, Clone, Reflect, Default)]
-#[reflect(Component)]
-pub struct Wireframe;
-
-#[derive(Debug, Clone)]
-pub struct WireframeConfig {
-    pub global: bool,
-}
-
-impl Default for WireframeConfig {
-    fn default() -> Self {
-        WireframeConfig { global: false }
     }
 }
 

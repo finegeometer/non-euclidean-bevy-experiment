@@ -51,10 +51,8 @@ pub mod prelude {
 }
 
 use crate::prelude::*;
-use base::Msaa;
 use bevy_app::prelude::*;
 use bevy_asset::{AddAsset, AssetStage};
-use bevy_ecs::schedule::{StageLabel, SystemLabel};
 use camera::{
     ActiveCameras, Camera, DepthCalculation, PerspectiveProjection, RenderLayers, ScalingMode,
     VisibleEntities, WindowOrigin,
@@ -74,24 +72,7 @@ use texture::HdrTextureLoader;
 #[cfg(feature = "png")]
 use texture::ImageTextureLoader;
 
-#[derive(Debug, Hash, PartialEq, Eq, Clone, SystemLabel)]
-pub enum RenderSystem {
-    VisibleEntities,
-}
-
-/// The names of "render" App stages
-#[derive(Debug, Hash, PartialEq, Eq, Clone, StageLabel)]
-pub enum RenderStage {
-    /// Stage where render resources are set up
-    RenderResource,
-    /// Stage where Render Graph systems are run. In general you shouldn't add systems to this
-    /// stage manually.
-    RenderGraphSystems,
-    // Stage where draw systems are executed. This is generally where Draw components are setup
-    Draw,
-    Render,
-    PostRender,
-}
+pub use bevy_render::{RenderStage, RenderSystem};
 
 /// Adds core render types and systems to an App
 pub struct RenderPlugin {
