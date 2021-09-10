@@ -19,7 +19,7 @@ pub mod colorspace {
 pub mod draw;
 pub mod entity;
 pub use bevy_render::mesh;
-pub mod pass;
+pub use bevy_render::pass;
 pub mod pipeline;
 pub mod render_graph;
 pub mod renderer;
