@@ -1,40 +1,24 @@
+pub use bevy_render::{colorspace, mesh, pass, shader, RenderStage, RenderSystem};
+pub use once_cell;
+
 pub mod camera;
 pub mod color {
-    use super::texture::Texture;
+    pub use bevy_render::color::{Color, HexColorError};
 
-    use crate::{
-        impl_render_resource_bytes,
-        renderer::{RenderResource, RenderResourceType},
-    };
+    use super::texture::Texture;
+    use crate::renderer::{RenderResource, RenderResourceType};
     use bevy_asset::Handle;
     use bevy_core::Bytes;
 
-    pub use bevy_render::color::{Color, HexColorError};
-
-    impl_render_resource_bytes!(Color);
-}
-pub mod colorspace {
-    pub use bevy_render::colorspace::*;
+    crate::impl_render_resource_bytes!(Color);
 }
 pub mod draw;
 pub mod entity;
-pub use bevy_render::mesh;
-pub use bevy_render::pass;
 pub mod pipeline;
 pub mod render_graph;
 pub mod renderer;
-pub use bevy_render::shader;
 pub mod texture;
 pub mod wireframe;
-
-use bevy_ecs::{
-    schedule::{ParallelSystemDescriptorCoercion, SystemStage},
-    system::{IntoExclusiveSystem, IntoSystem},
-};
-use bevy_transform_spherical::TransformSystem;
-use draw::{OutsideFrustum, Visible};
-
-pub use once_cell;
 
 pub mod prelude {
     pub use crate::{
@@ -53,10 +37,16 @@ pub mod prelude {
 use crate::prelude::*;
 use bevy_app::prelude::*;
 use bevy_asset::{AddAsset, AssetStage};
+use bevy_ecs::{
+    schedule::{ParallelSystemDescriptorCoercion, SystemStage},
+    system::{IntoExclusiveSystem, IntoSystem},
+};
+use bevy_transform_spherical::TransformSystem;
 use camera::{
     ActiveCameras, Camera, DepthCalculation, PerspectiveProjection, RenderLayers, ScalingMode,
     VisibleEntities, WindowOrigin,
 };
+use draw::OutsideFrustum;
 use pipeline::{
     IndexFormat, PipelineCompiler, PipelineDescriptor, PipelineSpecialization, PrimitiveTopology,
     ShaderSpecialization, VertexBufferLayout,
@@ -71,8 +61,6 @@ use shader::ShaderLoader;
 use texture::HdrTextureLoader;
 #[cfg(feature = "png")]
 use texture::ImageTextureLoader;
-
-pub use bevy_render::{RenderStage, RenderSystem};
 
 /// Adds core render types and systems to an App
 pub struct RenderPlugin {
