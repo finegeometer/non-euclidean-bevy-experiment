@@ -1,12 +1,12 @@
-pub use bevy_render::{color, colorspace, mesh, pass, shader, texture, RenderStage, RenderSystem};
+pub use bevy_render::{
+    color, colorspace, draw, mesh, pass, pipeline, renderer, shader, texture, RenderStage,
+    RenderSystem,
+};
 pub use once_cell;
 
 pub mod camera;
-pub mod draw;
 pub mod entity;
-pub mod pipeline;
 pub mod render_graph;
-pub mod renderer;
 pub mod wireframe;
 
 pub mod prelude {
