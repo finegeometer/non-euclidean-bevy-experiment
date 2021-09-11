@@ -417,14 +417,10 @@ dependencies = [
  "bevy_app",
  "bevy_asset",
  "bevy_core",
- "bevy_derive",
  "bevy_ecs",
- "bevy_math",
  "bevy_pbr",
- "bevy_reflect",
  "bevy_render_spherical",
  "bevy_transform_spherical",
- "bevy_window",
 ]
 
 [[package]]
@@ -493,12 +489,9 @@ dependencies = [
 name = "bevy_render_spherical"
 version = "0.5.0"
 dependencies = [
- "anyhow",
- "bevy-glsl-to-spirv",
  "bevy_app",
  "bevy_asset",
  "bevy_core",
- "bevy_derive",
  "bevy_ecs",
  "bevy_math",
  "bevy_reflect",
@@ -506,18 +499,6 @@ dependencies = [
  "bevy_transform_spherical",
  "bevy_utils",
  "bevy_window",
- "bitflags",
- "downcast-rs",
- "hex",
- "hexasphere",
- "image",
- "once_cell",
- "parking_lot",
- "serde",
- "shaderc",
- "smallvec",
- "spirv-reflect",
- "thiserror",
 ]
 
 [[package]]
@@ -581,8 +562,6 @@ dependencies = [
  "bevy_reflect",
  "bevy_render",
  "bevy_transform",
- "bevy_utils",
- "smallvec",
 ]
 
 [[package]]

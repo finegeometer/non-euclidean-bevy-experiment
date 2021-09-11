@@ -20,7 +20,6 @@ bevy_render = { version = "0.5.0" }
 bevy_app = { version = "0.5.0" }
 bevy_asset = { version = "0.5.0" }
 bevy_core = { version = "0.5.0" }
-bevy_derive = { version = "0.5.0" }
 bevy_ecs = { version = "0.5.0" }
 bevy_math = { version = "0.5.0" }
 bevy_reflect = { version = "0.5.0", features = ["bevy"] }
@@ -28,35 +27,10 @@ bevy_transform_spherical = { path = "../bevy_transform_spherical", version = "0.
 bevy_window = { version = "0.5.0" }
 bevy_utils = { version = "0.5.0" }
 
-# rendering
-image = { version = "0.23.12", default-features = false }
-
-# misc
-serde = { version = "1", features = ["derive"] }
-bitflags = "1.2.1"
-smallvec = "1.4.2"
-# TODO: replace once_cell with std equivalent if/when this lands: https://github.com/rust-lang/rfcs/pull/2788
-once_cell = "1.4.1"
-downcast-rs = "1.2.0"
-thiserror = "1.0"
-anyhow = "1.0"
-hex = "0.4.2"
-hexasphere = "3.2"
-parking_lot = "0.11.0"
-
-[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-spirv-reflect = "0.2.3"
-
-[target.'cfg(all(not(target_os = "ios"), not(target_arch = "wasm32"), not(all(target_arch = "aarch64", target_os = "macos"))))'.dependencies]
-bevy-glsl-to-spirv = "0.2.0"
-
-[target.'cfg(any(target_os = "ios", all(target_arch = "aarch64", target_os = "macos")))'.dependencies]
-shaderc = "0.7.0"
-
 [features]
-png = ["image/png", "bevy_render/png"]
-hdr = ["image/hdr", "bevy_render/hdr"]
-dds = ["image/dds", "bevy_render/dds"]
-tga = ["image/tga", "bevy_render/tga"]
-jpeg = ["image/jpeg", "bevy_render/jpeg"]
-bmp = ["image/bmp", "bevy_render/bmp"]
+png = ["bevy_render/png"]
+hdr = ["bevy_render/hdr"]
+dds = ["bevy_render/dds"]
+tga = ["bevy_render/tga"]
+jpeg = ["bevy_render/jpeg"]
+bmp = ["bevy_render/bmp"]
