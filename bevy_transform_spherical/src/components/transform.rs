@@ -55,9 +55,10 @@ impl Transform {
     /// If the vector is large, the translation will curve around the sphere.
     /// For example, translating by distance 2π will be the identity,
     /// because you go all the way around the sphere.
-    // TODO: Test this.
     #[inline]
     pub fn from_translation(mut translation: Vec3) -> Self {
+        translation *= 0.5;
+
         let len = translation.length();
         let (sin_len_by_len, cos_len) = if len < 0.0001 {
             (1., 1.)
@@ -66,7 +67,6 @@ impl Transform {
             (s / len, c)
         };
 
-        translation *= 0.5;
         translation *= sin_len_by_len;
 
         let quat = Quat::from_xyzw(translation.x, translation.y, translation.z, cos_len);

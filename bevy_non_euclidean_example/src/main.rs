@@ -27,6 +27,8 @@ fn main() {
         .add_plugin(bevy_wgpu::WgpuPlugin::default())
         .add_startup_system(setup.system())
         .add_system(motion.system())
+        .add_system(rotation.system())
+        .add_system(bevy_input::system::exit_on_esc_system.system())
         .run();
 }
 
@@ -53,7 +55,21 @@ fn motion(
 
     for mut transform in query.iter_mut() {
         *transform =
-            *transform * Transform::from_translation(direction * 0.1 * time.delta_seconds());
+            *transform * Transform::from_small_translation(direction * 0.3 * time.delta_seconds());
+    }
+}
+
+fn rotation(
+    mut mouse: EventReader<bevy_input::mouse::MouseMotion>,
+    mut query: Query<&mut Transform, With<Camera>>,
+    windows: Res<bevy_window::Windows>,
+) {
+    let mut delta: Vec2 = mouse.iter().map(|motion| &motion.delta).sum();
+    delta /= windows.get_primary().unwrap().height() / (std::f32::consts::PI / 4.0);
+
+    for mut transform in query.iter_mut() {
+        *transform = *transform
+            * Transform::from_rotation(Quat::from_xyzw(-delta.y, -delta.x, 0., 1.).normalize());
     }
 }
 
@@ -68,19 +84,25 @@ fn setup(
         ..Default::default()
     });
 
-    for x in 0..3 {
-        for y in 0..3 {
-            for z in 0..3 {
-                let transform = Transform::from_translation(Vec3::new(
-                    0.2 * x as f32,
-                    0.2 * y as f32,
-                    0.2 * z as f32,
-                ));
-
+    // cubes
+    for transform in [
+        Transform::identity(),
+        Transform::from_translation(Vec3::X * std::f32::consts::FRAC_PI_2),
+    ] {
+        for rotation in [
+            Quat::IDENTITY,
+            Quat::from_xyzw(0.5, 0.5, 0.5, 0.5),
+            Quat::from_xyzw(0.5, 0.5, 0.5, -0.5),
+        ] {
+            let transform = Transform::from_rotation(rotation) * transform;
+            for t in 0..5 {
                 commands.spawn_bundle(PbrBundle {
                     mesh: cube_handle.clone(),
                     material: cube_material_handle.clone(),
-                    transform,
+                    transform: transform
+                        * Transform::from_translation(
+                            Vec3::Z * std::f32::consts::FRAC_PI_8 * t as f32,
+                        ),
                     ..Default::default()
                 });
             }
@@ -99,8 +121,8 @@ fn setup(
     // camera
     commands
         .spawn_bundle(PerspectiveCameraBundle {
-            transform: Transform::from_translation(Vec3::new(0.25, 0.5, 0.5))
-                .looking_at(Vec4::W, Vec4::Y),
+            transform: Transform::from_translation(Vec3::new(-0.2, 0.2, -0.2))
+                .looking_at(Vec4::W + 0.2 * Vec4::Y, Vec4::Y),
 
             perspective_projection: bevy_render_spherical::camera::PerspectiveProjection {
                 tan_near: 0.01,
